@@ -418,6 +418,30 @@
     .bento-card--accent p { color: var(--c-acc-ink-2); }
     .bento-card--accent .bento-h,
     .bento-card--accent .bento-num { color: var(--c-acc-ink); }
+    .bento-name {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .bento-logo {
+      height: 40px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 5px 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    .bento-logo img {
+      height: 100%;
+      width: auto;
+      max-width: 110px;
+      object-fit: contain;
+      display: block;
+    }
 
     /* Pains */
     .pains-grid {
@@ -1347,22 +1371,35 @@
           </div>
           <div class="bento-card">
             <div class="bento-tag">КЛІЄНТ</div>
-            <div class="bento-h">GoIT</div>
+            <div class="bento-name">
+              <div class="bento-logo"><img src="assets/logos/goit.png" alt="GoIT"></div>
+              <div class="bento-h">GoIT</div>
+            </div>
             <p>Перший великий проєкт CRMiUM, 2016</p>
           </div>
           <div class="bento-card">
             <div class="bento-tag">КЛІЄНТ</div>
-            <div class="bento-h">Dicentra</div>
+            <div class="bento-name">
+              <div class="bento-logo"><img src="assets/logos/dicentra.png" alt="Dicentra"></div>
+              <div class="bento-h">Dicentra</div>
+            </div>
             <p>Довгостроковий партнер</p>
           </div>
           <div class="bento-card">
             <div class="bento-tag">КЛІЄНТ</div>
-            <div class="bento-h">InnoVEX</div>
+            <div class="bento-name">
+              <div class="bento-logo"><img src="assets/logos/innovecs.png" alt="Innovecs"></div>
+              <div class="bento-h">Innovecs</div>
+            </div>
             <p>Системне впровадження</p>
           </div>
           <div class="bento-card">
             <div class="bento-tag">КЛІЄНТИ</div>
-            <div class="bento-h">Coffee Group · Genesis</div>
+            <div class="bento-name">
+              <div class="bento-logo"><img src="assets/logos/coffee-group.png" alt="Coffee Group"></div>
+              <div class="bento-logo"><img src="assets/logos/genesis.png" alt="Genesis"></div>
+              <div class="bento-h">Coffee Group · Genesis</div>
+            </div>
             <p>Масштабування разом із Zoho</p>
           </div>
         </div>
