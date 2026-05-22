@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1">
+  <title>Zoho: не просто CRM, а повноцінна екосистема для бізнесу · Павло Яковенко · CRMiUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c-bg: #15171C;
+      --c-card: #1B1E25;
+      --c-dark: #0E1015;
+      --c-ink: #FFFFFF;
+      --c-ink-2: rgba(255,255,255,0.62);
+      --c-ink-3: rgba(255,255,255,0.38);
+      --c-line: rgba(255,255,255,0.10);
+      --c-tint-soft: rgba(255,255,255,0.05);
+      --c-acc: #EF652F;
+      --c-acc-soft: rgba(239,101,47,0.10);
+      --c-acc-mid: rgba(239,101,47,0.25);
+      --c-acc-hover: #D45520;
+      --c-acc-dark: #7A2D14;
+      --c-acc-ink: #FFFFFF;
+      --c-acc-ink-2: rgba(255,255,255,0.82);
+      --font-display: 'Onest', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--c-bg);
+      color: var(--c-ink);
+      font-family: var(--font-display);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+    body.pres { color-scheme: dark; }
+    img { display: block; max-width: 100%; }
+
+    .pres-bar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 76px;
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(21, 23, 28, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--c-line);
+      transition: opacity .3s var(--ease), transform .3s var(--ease);
+    }
+    body.no-bar .pres-bar { opacity: 0; transform: translateY(-100%); pointer-events: none; }
+    .pres-logo img { height: 44px; width: auto; }
+    .pres-counter {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--c-ink-2);
+      letter-spacing: 0.05em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pres-progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--c-line);
+      z-index: 101;
+    }
+    .pres-progress-bar {
+      height: 100%;
+      background: var(--c-acc);
+      width: 0%;
+      transition: width .4s var(--ease);
+    }
+
+    .pres-deck {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      transition: transform 600ms var(--ease);
+      will-change: transform;
+    }
+    .slide {
+      flex-shrink: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 100px 8vw 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-content {
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); }
+    .slide.is-active .reveal {
+      animation: slideReveal 600ms var(--ease) forwards;
+    }
+    .slide.is-active .reveal:nth-child(1) { animation-delay: 180ms; }
+    .slide.is-active .reveal:nth-child(2) { animation-delay: 280ms; }
+    .slide.is-active .reveal:nth-child(3) { animation-delay: 380ms; }
+    .slide.is-active .reveal:nth-child(4) { animation-delay: 480ms; }
+    .slide.is-active .reveal:nth-child(5) { animation-delay: 580ms; }
+    .slide.is-active .reveal:nth-child(6) { animation-delay: 680ms; }
+    @keyframes slideReveal {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-watermark {
+      position: absolute;
+      left: -3%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 106%;
+      height: auto;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 1;
+      filter: brightness(0) invert(1);
+    }
+    .slide-watermark--top {
+      top: 4%;
+      transform: none;
+      width: 90%;
+      left: 5%;
+    }
+    .slide-watermark--bottom {
+      top: auto;
+      bottom: -2%;
+      transform: none;
+      width: 90%;
+      left: 5%;
+    }
+    .slide--section .slide-watermark,
+    .slide--qa .slide-watermark {
+      opacity: 0.12;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 600;
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      background: var(--c-tint-soft);
+      border: 1px solid var(--c-line);
+      border-radius: 999px;
+    }
+    .slide-h1 {
+      font-size: clamp(52px, 6vw, 96px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      color: var(--c-ink);
+    }
+    .slide-h1 em {
+      font-style: normal;
+      color: var(--c-acc);
+      font-weight: 800;
+    }
+    .slide-h2 {
+      font-size: clamp(40px, 4.5vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--c-ink);
+      margin-bottom: 8px;
+    }
+    .slide-h2 em {
+      font-style: normal;
+      color: var(--c-acc);
+      font-weight: 800;
+    }
+    .slide-sub {
+      font-size: 24px;
+      color: var(--c-ink-2);
+      line-height: 1.5;
+      margin-top: 24px;
+      max-width: 1100px;
+    }
+    .slide-body {
+      font-size: 22px;
+      color: var(--c-ink-2);
+      line-height: 1.5;
+      max-width: 1100px;
+      margin-top: 20px;
+    }
+    .slide-body strong { color: var(--c-ink); font-weight: 600; }
+    .slide-body em { font-style: normal; color: var(--c-acc); font-weight: 600; }
+    .slide-body + .slide-body { margin-top: 18px; }
+
+    /* Cover */
+    .slide--cover {
+      background:
+        radial-gradient(120% 90% at 90% -10%, rgba(239,101,47,0.25) 0%, transparent 55%),
+        radial-gradient(80% 70% at -10% 110%, rgba(239,101,47,0.10) 0%, transparent 55%),
+        var(--c-bg);
+    }
+    .slide--cover .slide-h1 {
+      font-size: clamp(72px, 8.5vw, 140px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+    .cover-speaker {
+      margin-top: 72px;
+      padding-top: 32px;
+      border-top: 1px solid var(--c-line);
+    }
+    .cover-speaker-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--c-ink);
+    }
+    .cover-speaker-role {
+      font-size: 22px;
+      color: var(--c-acc);
+      margin-top: 6px;
+    }
+
+    /* Section divider */
+    .slide--section {
+      background:
+        radial-gradient(140% 100% at 100% 100%, rgba(239,101,47,0.55) 0%, transparent 50%),
+        radial-gradient(100% 80% at 0% 0%, rgba(239,101,47,0.20) 0%, transparent 55%),
+        linear-gradient(135deg, var(--c-acc-dark) 0%, var(--c-bg) 100%);
+    }
+    .slide--section .slide-h1 {
+      color: #FFFFFF;
+      font-size: clamp(72px, 9vw, 144px);
+      letter-spacing: -0.045em;
+      line-height: 0.94;
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+    .section-sub {
+      font-size: 32px;
+      color: rgba(255,255,255,0.85);
+      margin-top: 28px;
+      max-width: 1100px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .section-sub em {
+      font-style: normal;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+
+    /* Bullets */
+    .bullets-list {
+      list-style: none;
+      padding: 0;
+      margin: 48px 0 0;
+    }
+    .bullets-list li {
+      font-size: clamp(22px, 1.7vw, 30px);
+      line-height: 1.45;
+      color: var(--c-ink);
+      padding: 18px 0 18px 42px;
+      position: relative;
+      border-bottom: 1px solid var(--c-line);
+      font-weight: 500;
+    }
+    .bullets-list li:last-child { border-bottom: none; }
+    .bullets-list li::before {
+      content: '—';
+      position: absolute; left: 0; top: 18px;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+    .bullets-list--two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 60px;
+    }
+    .bullets-list--two-col li { border-bottom: 1px solid var(--c-line); }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 56px;
+    }
+    .stats-grid--4 {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+    }
+    .stat-card { text-align: left; }
+    .stat-num {
+      font-size: clamp(72px, 8.5vw, 140px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--c-ink);
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+    }
+    .stats-grid--4 .stat-num { font-size: clamp(56px, 6.5vw, 104px); }
+    .stat-suffix {
+      display: inline-block;
+      font-size: clamp(40px, 5vw, 80px);
+      font-weight: 800;
+      color: var(--c-acc);
+      margin-left: 4px;
+      vertical-align: top;
+    }
+    .stats-grid--4 .stat-suffix { font-size: clamp(36px, 4vw, 64px); }
+    .stat-label {
+      margin-top: 18px;
+      font-size: 20px;
+      color: var(--c-ink-2);
+      line-height: 1.4;
+      max-width: 320px;
+      font-weight: 500;
+    }
+    .stats-caption {
+      margin-top: 48px;
+      font-size: 22px;
+      color: var(--c-ink-2);
+      line-height: 1.55;
+      max-width: 1200px;
+    }
+
+    /* Bento */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-auto-rows: minmax(180px, auto);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .bento-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 22px;
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .bento-card:hover {
+      border-color: var(--c-acc-mid);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(239,101,47,0.14);
+    }
+    .bento-card--big {
+      grid-row: span 2;
+      justify-content: space-between;
+      padding: 40px 36px;
+    }
+    .bento-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+    .bento-h {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--c-ink);
+      line-height: 1.15;
+    }
+    .bento-card--big .bento-h { font-size: 40px; }
+    .bento-card p {
+      font-size: 18px;
+      color: var(--c-ink-2);
+      line-height: 1.5;
+      margin-top: auto;
+    }
+    .bento-num {
+      font-size: 96px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--c-ink);
+    }
+    .bento-num span {
+      font-size: 48px;
+      color: var(--c-acc);
+    }
+    .bento-card--accent {
+      background: var(--c-acc);
+      color: var(--c-acc-ink);
+      border-color: transparent;
+    }
+    .bento-card--accent .bento-tag,
+    .bento-card--accent p { color: var(--c-acc-ink-2); }
+    .bento-card--accent .bento-h,
+    .bento-card--accent .bento-num { color: var(--c-acc-ink); }
+
+    /* Pains */
+    .pains-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 48px;
+    }
+    .pain-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 22px;
+      padding: 38px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .pain-card:hover {
+      border-color: var(--c-acc-mid);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(239,101,47,0.14);
+    }
+    .pain-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+    .pain-h {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--c-ink);
+    }
+    .pain-h em {
+      font-style: italic;
+      color: var(--c-acc);
+      font-weight: 800;
+    }
+    .pain-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--c-ink-2);
+    }
+    .pain-list li {
+      padding-left: 22px;
+      position: relative;
+    }
+    .pain-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .feature-card:hover {
+      border-color: var(--c-acc-mid);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(239,101,47,0.14);
+    }
+    .feature-card--accent {
+      grid-column: span 2;
+      background: var(--c-acc);
+      color: var(--c-acc-ink);
+      border-color: transparent;
+    }
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--c-acc-soft);
+      color: var(--c-acc);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .feature-card--accent .feature-icon {
+      background: rgba(255,255,255,0.18);
+      color: var(--c-acc-ink);
+    }
+    .feature-h {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--c-ink);
+      line-height: 1.15;
+    }
+    .feature-card--accent .feature-h { color: var(--c-acc-ink); font-size: 28px; }
+    .feature-card p {
+      font-size: 18px;
+      color: var(--c-ink-2);
+      line-height: 1.5;
+      margin-top: auto;
+    }
+    .feature-card--accent p { color: var(--c-acc-ink-2); font-size: 19px; }
+
+    /* Compare (2-col) */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .compare-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 22px;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .compare-card--accent {
+      background: var(--c-acc);
+      color: var(--c-acc-ink);
+      border-color: transparent;
+    }
+    .compare-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+    .compare-card--accent .compare-tag { color: var(--c-acc-ink-2); }
+    .compare-h {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--c-ink);
+    }
+    .compare-card--accent .compare-h { color: var(--c-acc-ink); }
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 20px;
+      line-height: 1.45;
+      color: var(--c-ink-2);
+    }
+    .compare-card--accent .compare-list { color: var(--c-acc-ink-2); }
+    .compare-list li {
+      padding-left: 22px;
+      position: relative;
+    }
+    .compare-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+    .compare-card--accent .compare-list li::before { color: var(--c-acc-ink); }
+
+    /* Timeline */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+      position: relative;
+    }
+    .timeline-item {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .timeline-year {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+    .timeline-h {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--c-ink);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .timeline-item p {
+      font-size: 17px;
+      color: var(--c-ink-2);
+      line-height: 1.45;
+    }
+    .timeline-item--accent {
+      background: var(--c-acc);
+      color: var(--c-acc-ink);
+      border-color: transparent;
+    }
+    .timeline-item--accent .timeline-year { color: var(--c-acc-ink); }
+    .timeline-item--accent .timeline-h { color: var(--c-acc-ink); }
+    .timeline-item--accent p { color: var(--c-acc-ink-2); }
+
+    /* Quote */
+    .quote-mark {
+      font-size: 180px;
+      line-height: 0.5;
+      color: var(--c-acc);
+      font-family: serif;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .quote-text {
+      font-size: clamp(30px, 3.2vw, 52px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      max-width: 1300px;
+      color: var(--c-ink);
+    }
+    .quote-author {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      padding-top: 32px;
+      margin-top: 48px;
+      border-top: 1px solid var(--c-line);
+    }
+    .quote-name {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--c-ink);
+    }
+    .quote-role {
+      font-size: 18px;
+      color: var(--c-acc);
+      font-weight: 500;
+    }
+
+    /* Speaker */
+    .speaker-content {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .speaker-photo {
+      aspect-ratio: 4/5;
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      position: relative;
+    }
+    .speaker-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+    .speaker-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+    .speaker-name {
+      font-size: clamp(48px, 5vw, 88px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin: 12px 0;
+      color: var(--c-ink);
+    }
+    .speaker-role {
+      font-size: 26px;
+      color: var(--c-acc);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .speaker-bio {
+      font-size: 20px;
+      line-height: 1.55;
+      color: var(--c-ink-2);
+      max-width: 720px;
+    }
+
+    /* Contact */
+    .contact-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: 0.2em;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+    .contact-name {
+      font-size: clamp(56px, 7vw, 112px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin: 12px 0;
+      line-height: 1;
+      color: var(--c-ink);
+    }
+    .contact-role {
+      font-size: 26px;
+      color: var(--c-ink-2);
+      margin-bottom: 48px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      max-width: 1180px;
+    }
+    .contact-link {
+      display: block;
+      padding: 28px 32px;
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .3s var(--ease), transform .3s var(--ease);
+    }
+    .contact-link:hover {
+      border-color: var(--c-acc-mid);
+      transform: translateY(-2px);
+    }
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--c-ink-2);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .contact-value {
+      font-size: 22px;
+      color: var(--c-ink);
+      font-weight: 500;
+    }
+
+    /* Q&A */
+    .slide--qa {
+      background:
+        radial-gradient(120% 90% at 80% 110%, rgba(239,101,47,0.40) 0%, transparent 55%),
+        radial-gradient(80% 70% at 0% 0%, rgba(239,101,47,0.10) 0%, transparent 50%),
+        var(--c-bg);
+    }
+    .qa-text {
+      font-size: clamp(120px, 16vw, 280px);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      color: #FFFFFF;
+    }
+    .qa-text em {
+      font-style: normal;
+      color: var(--c-acc);
+      font-weight: 800;
+    }
+    .qa-sub {
+      font-size: 28px;
+      color: var(--c-ink-2);
+      margin-top: 28px;
+    }
+
+    /* Nav */
+    .pres-nav {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+    .pres-nav button {
+      width: 52px; height: 52px;
+      border: 1px solid var(--c-line);
+      background: rgba(21, 23, 28, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--c-ink);
+      border-radius: 14px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: border-color .2s var(--ease), background .2s, transform .15s;
+      font-family: inherit;
+    }
+    .pres-nav button:hover {
+      border-color: var(--c-acc-mid);
+      background: rgba(239,101,47,0.12);
+    }
+    .pres-nav button:active { transform: scale(0.95); }
+    .pres-nav button:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+    body.no-bar .pres-nav button {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.3);
+      color: #FFFFFF;
+    }
+
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      html, body { background: #15171C !important; overflow: visible !important; height: auto !important; width: auto !important; }
+      .pres-bar, .pres-nav, .pres-progress { display: none !important; }
+      .pres-deck { transform: none !important; display: block !important; width: 100% !important; height: auto !important; }
+      .slide {
+        width: 1920px !important;
+        height: 1080px !important;
+        page-break-after: always;
+        break-inside: avoid;
+        padding: 100px 160px 80px !important;
+      }
+      .slide:last-child { page-break-after: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body class="pres" data-palette="brand-dark">
+  <div class="pres-progress"><div class="pres-progress-bar"></div></div>
+
+  <header class="pres-bar">
+    <div class="pres-logo">
+      <img src="assets/crmium-logo-white.png" alt="CRMiUM">
+    </div>
+    <div class="pres-counter"><span class="counter-curr">1</span> / <span class="counter-total">35</span></div>
+  </header>
+
+  <main class="pres-deck">
+
+    <!-- 1. Cover -->
+    <section class="slide slide--cover is-active" data-slide="1">
+      <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ZOHO SUMMIT · 2026</div>
+        <h1 class="slide-h1 reveal">
+          Zoho: не просто <em>CRM</em>,<br>
+          а повноцінна <em>екосистема</em> для бізнесу
+        </h1>
+        <p class="slide-sub reveal">Повноцінна бізнес-платформа для автоматизації малого та середнього бізнесу.</p>
+        <div class="cover-speaker reveal">
+          <div class="cover-speaker-name">Павло Яковенко</div>
+          <div class="cover-speaker-role">CEO / Founder · CRMiUM</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Speaker intro -->
+    <section class="slide slide--speaker" data-slide="2">
+      <div class="slide-content speaker-content">
+        <div class="speaker-photo reveal"><img src="assets/yakovenko.jpg" alt="Павло Яковенко"></div>
+        <div class="speaker-info">
+          <div class="speaker-eyebrow reveal">СПІКЕР</div>
+          <h1 class="speaker-name reveal">Павло Яковенко</h1>
+          <div class="speaker-role reveal">CEO / Founder · CRMiUM</div>
+          <p class="speaker-bio reveal">
+            Засновник CRMiUM. Запустив Zoho в Україні у 2016 році, фактично став першим інтегратором-партнером Zoho на українському ринку. 10+ років системних впроваджень Zoho для бізнесу різного масштабу — від невеликих команд до системного середнього бізнесу.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CRMiUM stats -->
+    <section class="slide slide--stats" data-slide="3">
+      <div class="slide-content">
+        <div class="eyebrow reveal">CRMiUM</div>
+        <h2 class="slide-h2 reveal">Інтегратор <em>CRM/ERP</em> систем</h2>
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <div class="stat-num" data-counter="500">0</div><div class="stat-suffix">+</div>
+            <div class="stat-label">проєктів впроваджено</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-counter="80">0</div><div class="stat-suffix">+</div>
+            <div class="stat-label">спеціалістів у команді</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-counter="10">0</div><div class="stat-suffix">+</div>
+            <div class="stat-label">років на ринку</div>
+          </div>
+        </div>
+        <p class="stats-caption reveal">
+          Стек: Zoho · Odoo · Creatio · Salesforce
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. Agenda -->
+    <section class="slide slide--bullets" data-slide="4">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ПЛАН</div>
+        <h2 class="slide-h2 reveal">Про що сьогодні <em>поговоримо</em></h2>
+        <ul class="bullets-list reveal">
+          <li>Що таке Zoho як екосистема — і чим відрізняється від звичайної CRM</li>
+          <li>Як почалась історія Zoho в Україні (мій особистий шлях із 2016)</li>
+          <li>Адаптація Zoho до українського ринку</li>
+          <li>Глобальна історія Zoho — 30 років розвитку</li>
+          <li>Zoho + AI: новий етап розвитку екосистеми</li>
+          <li>Zoho vs «зоопарк систем» — чому єдина платформа виграє</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. Section divider — Zoho як екосистема -->
+    <section class="slide slide--section" data-slide="5">
+      <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">01</div>
+        <h1 class="slide-h1 reveal">Zoho як <em>екосистема</em></h1>
+        <p class="section-sub reveal">Не окрема CRM. <em>Платформа</em> з 60+ застосунками.</p>
+      </div>
+    </section>
+
+    <!-- 6. Compare — 2 категорії систем -->
+    <section class="slide slide--compare" data-slide="6">
+      <div class="slide-content">
+        <div class="eyebrow reveal">IT-РИНОК СЬОГОДНІ</div>
+        <h2 class="slide-h2 reveal">Дві категорії <em>бізнес-систем</em></h2>
+        <div class="compare-grid reveal">
+          <div class="compare-card">
+            <div class="compare-tag">КАТЕГОРІЯ 1</div>
+            <h3 class="compare-h">Вузькоспеціалізовані рішення</h3>
+            <ul class="compare-list">
+              <li>CRM</li>
+              <li>Таск-менеджер</li>
+              <li>Бухгалтерія</li>
+              <li>Email-маркетинг</li>
+              <li>Сервіс підтримки</li>
+            </ul>
+            <p style="font-size:18px;color:var(--c-ink-3);margin-top:12px;">Кожен закриває одну конкретну задачу</p>
+          </div>
+          <div class="compare-card compare-card--accent">
+            <div class="compare-tag">КАТЕГОРІЯ 2 · ZOHO</div>
+            <h3 class="compare-h">Екосистеми</h3>
+            <ul class="compare-list">
+              <li>Об'єднують велику кількість бізнес-процесів</li>
+              <li>В єдиному середовищі</li>
+              <li>З наскрізною інтеграцією</li>
+              <li>Спільною логікою даних</li>
+              <li>І єдиною автоматизацією</li>
+            </ul>
+            <p style="font-size:18px;color:var(--c-acc-ink-2);margin-top:12px;">Саме до таких належить Zoho</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Big stat — 60+ apps -->
+    <section class="slide slide--stats" data-slide="7">
+      <div class="slide-content">
+        <div class="eyebrow reveal">МАСШТАБ ZOHO</div>
+        <h2 class="slide-h2 reveal">Не CRM. <em>Масштабна</em> бізнес-платформа.</h2>
+        <div class="stats-grid reveal" style="grid-template-columns: 1fr;">
+          <div class="stat-card" style="text-align:center;">
+            <div style="display:inline-block;">
+              <div class="stat-num" data-counter="60" style="font-size:clamp(140px, 18vw, 320px);">0</div><div class="stat-suffix" style="font-size:clamp(80px, 10vw, 160px);">+</div>
+            </div>
+            <div class="stat-label" style="font-size:28px;max-width:none;margin-top:24px;">інтегрованих застосунків для автоматизації малого та середнього бізнесу</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Bullets — 10 areas -->
+    <section class="slide slide--bullets" data-slide="8">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ОДНА ЕКОСИСТЕМА</div>
+        <h2 class="slide-h2 reveal">У межах Zoho компанія може <em>керувати</em></h2>
+        <ul class="bullets-list bullets-list--two-col reveal">
+          <li>Продажами</li>
+          <li>Маркетингом</li>
+          <li>Підтримкою клієнтів</li>
+          <li>Фінансами</li>
+          <li>HR-процесами</li>
+          <li>Проєктами</li>
+          <li>Аналітикою</li>
+          <li>Внутрішніми комунікаціями</li>
+          <li>Документообігом</li>
+          <li>Автоматизацією бізнес-процесів</li>
+        </ul>
+        <p class="slide-body reveal" style="margin-top:32px;"><em>Головна ідея Zoho</em> — створити єдине цифрове середовище для управління бізнесом, де всі інструменти вже інтегровані між собою.</p>
+      </div>
+    </section>
+
+    <!-- 9. Section — Історія Zoho в Україні -->
+    <section class="slide slide--section" data-slide="9">
+      <img class="slide-watermark slide-watermark--top" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">02</div>
+        <h1 class="slide-h1 reveal">Як почалась історія<br>Zoho в <em>Україні</em></h1>
+        <p class="section-sub reveal">2016 рік. GoIT. Перший інтегратор-партнер.</p>
+      </div>
+    </section>
+
+    <!-- 10. 2016 GoIT -->
+    <section class="slide" data-slide="10">
+      <div class="slide-content">
+        <div class="eyebrow reveal">2016 · ПОЧАТОК</div>
+        <h2 class="slide-h2 reveal">Перший клієнт — <em>GoIT</em></h2>
+        <p class="slide-body reveal">Я особисто дуже люблю саме <em>екосистемний підхід</em> до автоматизації бізнесу. І саме тому свого часу звернув увагу на Zoho.</p>
+        <p class="slide-body reveal">У 2016 році, працюючи як фрілансер із моїм першим великим клієнтом — <strong>GoIT</strong> — ми займалися вибором CRM-системи для компанії. Аналізували практично все, що тоді було на ринку: функціональність, вартість, масштабованість, інтеграції, гнучкість налаштування та зручність роботи.</p>
+        <p class="slide-body reveal">Це був великий процес із порівняльними таблицями, тестуванням і оцінкою різних рішень. І в результаті я обрав саме <em>Zoho</em>.</p>
+      </div>
+    </section>
+
+    <!-- 11. Zoho ширше за CRM -->
+    <section class="slide" data-slide="11">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ПЕРШІ ВРАЖЕННЯ</div>
+        <h2 class="slide-h2 reveal">Zoho мислить ширше за <em>класичну CRM</em></h2>
+        <p class="slide-body reveal">Уже тоді було помітно, що Zoho — це не просто окрема система для продажів, а <strong>ціла платформа</strong>, де різні продукти працюють разом і створюють єдине середовище для бізнесу.</p>
+        <p class="slide-body reveal">Спочатку я навіть не планував впроваджувати Zoho самостійно. Ідея була знайти інтегратора, який реалізує проєкт, а я зі сторони клієнта допомагатиму управляти впровадженням.</p>
+      </div>
+    </section>
+
+    <!-- 12. Став інтегратором -->
+    <section class="slide" data-slide="12">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ПОВОРОТНИЙ МОМЕНТ</div>
+        <h2 class="slide-h2 reveal">В Україні Zoho майже <em>ніхто не знав</em></h2>
+        <p class="slide-body reveal">Виникла проблема: в Україні практично ніхто не працював із Zoho.</p>
+        <p class="slide-body reveal">Тому я вирішив <em>сам стати інтегратором-партнером Zoho</em>. Пройшов партнерську сертифікацію, отримав статус інтегратора та почав запускати перші проєкти.</p>
+      </div>
+    </section>
+
+    <!-- 13. Bullets — переваги які побачив -->
+    <section class="slide slide--bullets" data-slide="13">
+      <div class="slide-content">
+        <div class="eyebrow reveal">У ПРОЦЕСІ РОБОТИ</div>
+        <h2 class="slide-h2 reveal">Стало зрозуміло, наскільки <em>сильним</em> є цей продукт</h2>
+        <ul class="bullets-list reveal">
+          <li>Система легко адаптується під бізнес</li>
+          <li>Швидко працює</li>
+          <li>Має величезну гнучкість</li>
+          <li>Дозволяє масштабувати процеси</li>
+          <li>І при цьому залишається конкурентною за вартістю</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 14. Zoho vs Bitrix -->
+    <section class="slide" data-slide="14">
+      <div class="slide-content">
+        <div class="eyebrow reveal">РИНОК ТОДІ</div>
+        <h2 class="slide-h2 reveal">Просувати Zoho було <em>непросто</em></h2>
+        <p class="slide-body reveal">Ринок майже не знав цей продукт. В Україні домінував <strong>Bitrix</strong>, який здавався дешевшим та «ніби робив те саме».</p>
+        <p class="slide-body reveal">Але з часом стало очевидно, що Zoho — це <em>зовсім інший рівень архітектури</em> та підходу до автоматизації бізнесу.</p>
+        <p class="slide-body reveal">Так фактично і почалася історія Zoho в Україні.</p>
+      </div>
+    </section>
+
+    <!-- 15. Сьогодні після вторгнення -->
+    <section class="slide" data-slide="15">
+      <div class="slide-content">
+        <div class="eyebrow reveal">СЬОГОДНІ</div>
+        <h2 class="slide-h2 reveal">Інтерес до Zoho в Україні <em>сильно виріс</em></h2>
+        <p class="slide-body reveal">Особливо після повномасштабного вторгнення.</p>
+        <p class="slide-body reveal">Точної аналітики ринку немає, але якщо говорити про <strong>нові впровадження та нові запуски комплексних систем автоматизації</strong> — Zoho сьогодні один із найсильніших гравців на українському ринку.</p>
+      </div>
+    </section>
+
+    <!-- 16. Section — Адаптація до UA -->
+    <section class="slide slide--section" data-slide="16">
+      <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">03</div>
+        <h1 class="slide-h1 reveal">Як Zoho адаптувався<br>до <em>українського</em> ринку</h1>
+        <p class="section-sub reveal">Від глобального продукту — до локальної платформи.</p>
+      </div>
+    </section>
+
+    <!-- 17. Чого не вистачало -->
+    <section class="slide slide--bullets" data-slide="17">
+      <div class="slide-content">
+        <div class="eyebrow reveal">НА РАННІХ ЕТАПАХ</div>
+        <h2 class="slide-h2 reveal">Чого <em>не вистачало</em> українському бізнесу</h2>
+        <p class="slide-body reveal" style="margin-top:16px;">Спочатку Zoho був більше орієнтований на ринки США, Європи та Азії. Не вистачало:</p>
+        <ul class="bullets-list bullets-list--two-col reveal">
+          <li>Телефонії</li>
+          <li>Месенджерів</li>
+          <li>Локальних сервісів</li>
+          <li>Окремих фінансових інструментів</li>
+          <li>Специфічних українських бізнес-процесів</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 18. Як ринок змінювався -->
+    <section class="slide slide--features" data-slide="18">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ПОСТУПОВІ ЗМІНИ</div>
+        <h2 class="slide-h2 reveal">Як ринок <em>змінювався</em></h2>
+        <div class="features-grid reveal" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="feature-card">
+            <div class="feature-icon">API</div>
+            <h3 class="feature-h">Zoho активно розширював API</h3>
+            <p>Можливості інтеграцій росли експоненційно</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">UA</div>
+            <h3 class="feature-h">CRMiUM інвестував у локальні рішення</h3>
+            <p>Ми як інтегратори створювали інтеграції під ринок</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">DEV</div>
+            <h3 class="feature-h">Партнерська екосистема росла</h3>
+            <p>Українські розробники почали створювати інтеграції</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19. Zoho в Україні сьогодні -->
+    <section class="slide slide--bullets" data-slide="19">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ZOHO В УКРАЇНІ СЬОГОДНІ</div>
+        <h2 class="slide-h2 reveal">Повноцінна <em>бізнес-платформа</em></h2>
+        <p class="slide-body reveal">Після початку повномасштабної війни стало зрозуміло: Zoho — це серйозний довгостроковий гравець на українському ринку. Екосистема активно обростала локальними рішеннями.</p>
+        <ul class="bullets-list reveal" style="margin-top:32px;">
+          <li>Частина інтеграцій вже готова «з коробки»</li>
+          <li>Частина реалізується через партнерські рішення</li>
+          <li>А будь-які нестандартні задачі — через API та кастомні інтеграції</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 20. Section — Глобальна історія Zoho -->
+    <section class="slide slide--section" data-slide="20">
+      <img class="slide-watermark slide-watermark--top" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">04</div>
+        <h1 class="slide-h1 reveal">Глобальна історія<br><em>Zoho</em></h1>
+        <p class="section-sub reveal">Від AdventNet (1996) до однієї з найбільших <em>SaaS-екосистем</em> світу.</p>
+      </div>
+    </section>
+
+    <!-- 21. Timeline -->
+    <section class="slide" data-slide="21">
+      <div class="slide-content">
+        <div class="eyebrow reveal">30 РОКІВ РОЗВИТКУ</div>
+        <h2 class="slide-h2 reveal">Ключові віхи <em>Zoho</em></h2>
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <div class="timeline-year">1996</div>
+            <h3 class="timeline-h">AdventNet</h3>
+            <p>Шрідар Вембу та Тоні Томас засновують компанію. Deep-tech для enterprise-сегменту.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2000s</div>
+            <h3 class="timeline-h">Перехід у Cloud</h3>
+            <p>Одна з перших побачила потенціал SaaS-моделі. Запускає окремий бренд Zoho.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2005</div>
+            <h3 class="timeline-h">Zoho CRM</h3>
+            <p>Одне з ранніх cloud CRM-рішень для малого та середнього бізнесу.</p>
+          </div>
+          <div class="timeline-item timeline-item--accent">
+            <div class="timeline-year">2017</div>
+            <h3 class="timeline-h">Zoho One</h3>
+            <p>Єдина екосистема з однією ліцензією. «Операційна система для бізнесу».</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22. AdventNet 1996 -->
+    <section class="slide" data-slide="22">
+      <div class="slide-content">
+        <div class="eyebrow reveal">1996 · ПОЧАТОК</div>
+        <h2 class="slide-h2 reveal">AdventNet — <em>deep-tech</em>, не SaaS</h2>
+        <p class="slide-body reveal">Історія Zoho починається у 1996 році, коли <strong>Шрідар Вембу та Тоні Томас</strong> заснували компанію AdventNet.</p>
+        <p class="slide-body reveal">Спочатку компанія займалася програмним забезпеченням для мережевої інфраструктури та системного адміністрування. Тобто Zoho починався зовсім не як CRM або SaaS-продукт, а як <em>deep-tech компанія</em> для enterprise-сегменту.</p>
+        <p class="slide-body reveal">Уже тоді команда робила ставку не на маркетинг, а на сильну <strong>інженерну експертизу</strong> та власні технології — і ця філософія збереглася до сьогодні.</p>
+      </div>
+    </section>
+
+    <!-- 23. SaaS pivot + Zoho CRM -->
+    <section class="slide" data-slide="23">
+      <div class="slide-content">
+        <div class="eyebrow reveal">2000s · ПЕРЕЛОМ</div>
+        <h2 class="slide-h2 reveal">Перехід у <em>хмарні</em> технології</h2>
+        <p class="slide-body reveal">На початку 2000-х компанія однією з перших побачила потенціал <strong>SaaS-моделі</strong> — програмного забезпечення, яке працює через браузер. У той час це був революційний підхід.</p>
+        <p class="slide-body reveal">AdventNet починає запускати свої перші cloud-продукти, а згодом формує окремий бренд <em>Zoho</em>.</p>
+        <p class="slide-body reveal">У <strong>2005 році</strong> з'являється Zoho CRM — одне з ранніх cloud CRM-рішень для малого та середнього бізнесу. Але головна ідея компанії була значно ширшою.</p>
+      </div>
+    </section>
+
+    <!-- 24. Zoho One 2017 -->
+    <section class="slide" data-slide="24">
+      <div class="slide-content">
+        <div class="eyebrow reveal">2017 · ZOHO ONE</div>
+        <h2 class="slide-h2 reveal">Народження <em>єдиної</em> бізнес-платформи</h2>
+        <p class="slide-body reveal">У 2017 році компанія запускає <strong>Zoho One</strong> — продукт, який об'єднав більшість сервісів Zoho в єдину екосистему з однією ліцензією.</p>
+        <p class="slide-body reveal">Це стало одним із найважливіших стратегічних кроків компанії. Фактично Zoho One закріпив головну ідею Zoho: бізнес має працювати <em>в єдиному цифровому середовищі</em>.</p>
+        <p class="slide-body reveal">Саме після запуску Zoho One компанію все частіше почали називати <em>«операційною системою для бізнесу»</em>.</p>
+      </div>
+    </section>
+
+    <!-- 25. Без інвесторів та IPO -->
+    <section class="slide" data-slide="25">
+      <div class="slide-content">
+        <div class="eyebrow reveal">УНІКАЛЬНІСТЬ</div>
+        <h2 class="slide-h2 reveal">Розвиток <em>без інвесторів</em> та IPO</h2>
+        <p class="slide-body reveal">Zoho ніколи не залучала зовнішні венчурні інвестиції та не виходила на IPO. Досі залишається <strong>приватною компанією</strong>, контроль над якою зберігають засновники.</p>
+        <ul class="bullets-list reveal" style="margin-top:24px;">
+          <li>Не залежить від тиску інвесторів</li>
+          <li>Не женеться за короткостроковими показниками</li>
+          <li>Інвестує у довгостроковий розвиток продукту</li>
+          <li>Фокусується на якості екосистеми</li>
+          <li>Розвиває власні технології замість агресивного growth-маркетингу</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 26. Індійська компанія -->
+    <section class="slide" data-slide="26">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ТЕХНОЛОГІЧНА НЕЗАЛЕЖНІСТЬ</div>
+        <h2 class="slide-h2 reveal">Індійська компанія <em>глобального</em> масштабу</h2>
+        <p class="slide-body reveal">Zoho — один із небагатьох глобальних IT-брендів, який відкрито підкреслює своє <strong>індійське походження</strong>. Активно розвиває власні R&amp;D-центри в Індії та інвестує у локальну інженерну школу.</p>
+        <ul class="bullets-list bullets-list--two-col reveal" style="margin-top:24px;">
+          <li>Розвиває власну інфраструктуру</li>
+          <li>Будує власні дата-центри</li>
+          <li>Створює власні технології</li>
+          <li>Мінімізує залежність від Big Tech</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 27. Філософія -->
+    <section class="slide" data-slide="27">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ФІЛОСОФІЯ</div>
+        <h2 class="slide-h2 reveal">Стабільне <em>довгострокове</em> зростання</h2>
+        <p class="slide-body reveal">Компанія роками росла <strong>без агресивного маркетингу</strong>, без гонитви за хайпом і без «спалювання» інвестиційних грошей.</p>
+        <ul class="bullets-list bullets-list--two-col reveal" style="margin-top:24px;">
+          <li>Розвиток власних технологій</li>
+          <li>Інтеграція між продуктами</li>
+          <li>Масштабованість</li>
+          <li>Простота використання</li>
+          <li>Довгострокова цінність</li>
+          <li>Єдина екосистема для бізнесу</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 28. Zoho today stats -->
+    <section class="slide slide--stats" data-slide="28">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ZOHO СЬОГОДНІ</div>
+        <h2 class="slide-h2 reveal">Одна з найбільших <em>SaaS-екосистем</em> світу</h2>
+        <div class="stats-grid stats-grid--4 reveal">
+          <div class="stat-card">
+            <div class="stat-num" data-counter="60">0</div><div class="stat-suffix">+</div>
+            <div class="stat-label">бізнес-застосунків</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-counter="100">0</div><div class="stat-suffix">M+</div>
+            <div class="stat-label">користувачів у світі</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-counter="150">0</div><div class="stat-suffix">+</div>
+            <div class="stat-label">країн присутності</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-counter="1">0</div><div class="stat-suffix">M+</div>
+            <div class="stat-label">компаній-клієнтів</div>
+          </div>
+        </div>
+        <p class="stats-caption reveal">Конкурує з Salesforce, Microsoft, Google Workspace, Oracle, HubSpot. При цьому залишається приватною та незалежною.</p>
+      </div>
+    </section>
+
+    <!-- 29. Section — Zoho в Україні 10+ років -->
+    <section class="slide slide--section" data-slide="29">
+      <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">05</div>
+        <h1 class="slide-h1 reveal">Zoho в Україні —<br><em>10+ років</em> разом</h1>
+        <p class="section-sub reveal">Компанії не «спробували» — вони <em>ростуть</em> разом із платформою.</p>
+      </div>
+    </section>
+
+    <!-- 30. Bento — UA clients -->
+    <section class="slide slide--bento" data-slide="30">
+      <div class="slide-content">
+        <div class="eyebrow reveal">КОМПАНІЇ НА ZOHO РОКАМИ</div>
+        <h2 class="slide-h2 reveal">Українські клієнти, які <em>працюють із Zoho</em></h2>
+        <div class="bento-grid reveal" style="grid-template-columns: 1.6fr 1fr 1fr;">
+          <div class="bento-card bento-card--big bento-card--accent">
+            <div class="bento-tag">5–10+ РОКІВ</div>
+            <div>
+              <div class="bento-num">10<span>+ років</span></div>
+            </div>
+            <p>Багато з цих компаній прийшли в Zoho ще будучи невеликим бізнесом — і за цей час виросли до системного середнього бізнесу, продовжуючи працювати всередині тієї ж екосистеми.</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">КЛІЄНТ</div>
+            <div class="bento-h">GoIT</div>
+            <p>Перший великий проєкт CRMiUM, 2016</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">КЛІЄНТ</div>
+            <div class="bento-h">Dicentra</div>
+            <p>Довгостроковий партнер</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">КЛІЄНТ</div>
+            <div class="bento-h">InnoVEX</div>
+            <p>Системне впровадження</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">КЛІЄНТИ</div>
+            <div class="bento-h">Coffee Group · Genesis</div>
+            <p>Масштабування разом із Zoho</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 31. Quote -->
+    <section class="slide" data-slide="31">
+      <div class="slide-content">
+        <div class="quote-mark reveal">"</div>
+        <p class="quote-text reveal">Компанії <em style="color:var(--c-acc);">ростуть разом із Zoho</em> — не змінюючи платформу при масштабуванні бізнесу.</p>
+        <div class="quote-author reveal">
+          <div class="quote-name">Павло Яковенко</div>
+          <div class="quote-role">CEO CRMiUM</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 32. Чому залишаються -->
+    <section class="slide slide--bullets" data-slide="32">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ЧОМУ ЗАЛИШАЮТЬСЯ НА 5, 7, 10+ РОКІВ</div>
+        <h2 class="slide-h2 reveal">Zoho постійно <em>розвивається</em> разом із бізнесом</h2>
+        <p class="slide-body reveal">Це одна з небагатьох платформ, яка не «застигає» у певній версії продукту.</p>
+        <ul class="bullets-list bullets-list--two-col reveal" style="margin-top:32px;">
+          <li>Додає нові можливості</li>
+          <li>Розширює автоматизацію</li>
+          <li>Покращує інтеграції</li>
+          <li>Розвиває API</li>
+          <li>Впроваджує AI-функціонал</li>
+          <li>Адаптується до сучасних потреб бізнесу</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 33. Що виросло -->
+    <section class="slide slide--bullets" data-slide="33">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ZOHO ТОДІ vs ZOHO СЬОГОДНІ</div>
+        <h2 class="slide-h2 reveal">Це <em>практично дві різні</em> системи</h2>
+        <p class="slide-body reveal">За 10 років кардинально виросли:</p>
+        <ul class="bullets-list bullets-list--two-col reveal" style="margin-top:32px;">
+          <li>Можливості автоматизації</li>
+          <li>Інтеграційна архітектура</li>
+          <li>API</li>
+          <li>AI-функціонал</li>
+          <li>Аналітика</li>
+          <li>Low-code / no-code можливості</li>
+          <li>Масштабованість екосистеми</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 34. Section — Zoho + AI -->
+    <section class="slide slide--section" data-slide="34">
+      <img class="slide-watermark slide-watermark--top" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">06</div>
+        <h1 class="slide-h1 reveal">Zoho + <em>AI</em></h1>
+        <p class="section-sub reveal">Новий етап: AI стає <em>частиною</em> бізнес-процесів, а не додатком.</p>
+      </div>
+    </section>
+
+    <!-- 35. Zia AI -->
+    <section class="slide slide--bento" data-slide="35">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ZIA · AI-АСИСТЕНТ ZOHO</div>
+        <h2 class="slide-h2 reveal">AI <em>інтегровано</em> у всі продукти</h2>
+        <div class="bento-grid reveal">
+          <div class="bento-card bento-card--big bento-card--accent">
+            <div class="bento-tag">ZIA</div>
+            <h3 class="bento-h">Вбудований AI-асистент, який розвивається від CRM до всієї екосистеми</h3>
+            <p>Забезпечує аналітику, прогнозування та автоматизацію в єдиній платформі.</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">SALES</div>
+            <div class="bento-h">CRM та продажі</div>
+            <p>Прогнози, scoring</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">FINANCE</div>
+            <div class="bento-h">Фінанси та аналітика</div>
+            <p>Інсайти, anomaly detection</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">SUPPORT</div>
+            <div class="bento-h">Підтримка, пошта</div>
+            <p>Авто-відповіді, sentiment</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">PROCESSES</div>
+            <div class="bento-h">Управління процесами</div>
+            <p>Smart workflow</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 36. AI-агенти -->
+    <section class="slide slide--features" data-slide="36">
+      <div class="slide-content">
+        <div class="eyebrow reveal">МАЙБУТНЄ</div>
+        <h2 class="slide-h2 reveal">AI-агенти як <em>цифрові співробітники</em></h2>
+        <p class="slide-body reveal">Zoho переходить до концепції AI-агентів, які виконують бізнес-завдання:</p>
+        <div class="features-grid reveal" style="grid-template-columns: repeat(3, 1fr); margin-top:32px;">
+          <div class="feature-card">
+            <div class="feature-icon">⚙</div>
+            <h3 class="feature-h">Автоматизація процесів</h3>
+            <p>CRM, продажі, підтримка — без втручання людини</p>
+          </div>
+          <div class="feature-card feature-card--accent" style="grid-column: span 1;">
+            <div class="feature-icon">★</div>
+            <h3 class="feature-h">Власна AI-інфраструктура</h3>
+            <p>Zoho формує екосистему, де AI стає «цифровим співробітником» бізнесу</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">▶</div>
+            <h3 class="feature-h">Виконання дій</h3>
+            <p>Генерація контенту, аналітики та дій у системі</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 37. Section — Zoho vs зоопарк -->
+    <section class="slide slide--section" data-slide="37">
+      <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">07</div>
+        <h1 class="slide-h1 reveal">Zoho vs <em>«зоопарк</em> систем»</h1>
+        <p class="section-sub reveal">Чому єдина екосистема <em>виграє</em> у фрагментованого ландшафту.</p>
+      </div>
+    </section>
+
+    <!-- 38. Pains — зоопарк -->
+    <section class="slide slide--pains" data-slide="38">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ПРОБЛЕМА</div>
+        <h2 class="slide-h2 reveal">«Зоопарк» <em>фрагментує</em> бізнес</h2>
+        <div class="pains-grid reveal">
+          <div class="pain-card">
+            <div class="pain-tag">ФРАГМЕНТАЦІЯ</div>
+            <h3 class="pain-h">6 різних <em>систем</em></h3>
+            <ul class="pain-list">
+              <li>CRM — одна</li>
+              <li>Задачі — в іншій</li>
+              <li>Фінанси — у третій</li>
+              <li>Аналітика — у четвертій</li>
+              <li>Маркетинг — у шостій</li>
+            </ul>
+          </div>
+          <div class="pain-card">
+            <div class="pain-tag">ІНТЕГРАЦІЇ</div>
+            <h3 class="pain-h">Постійне <em>«склеювання»</em></h3>
+            <ul class="pain-list">
+              <li>Інтеграції працюють нестабільно</li>
+              <li>Дані дублюються</li>
+              <li>Кожна система живе своїм життям</li>
+              <li>Підтримувати усе разом — складно</li>
+            </ul>
+          </div>
+          <div class="pain-card">
+            <div class="pain-tag">РЕЗУЛЬТАТ</div>
+            <h3 class="pain-h">Цифровізація <em>без цілісності</em></h3>
+            <ul class="pain-list">
+              <li>Автоматизація фрагментарна</li>
+              <li>Наскрізна аналітика недосяжна</li>
+              <li>Системи начебто є, а ефекту немає</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 39. Підхід Zoho -->
+    <section class="slide slide--bento" data-slide="39">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ПІДХІД ZOHO</div>
+        <h2 class="slide-h2 reveal">Єдина <em>операційна система</em> для бізнесу</h2>
+        <div class="bento-grid reveal">
+          <div class="bento-card bento-card--big bento-card--accent">
+            <div class="bento-tag">ЦІЛІСНІСТЬ</div>
+            <h3 class="bento-h">Інтеграції побудовані на рівні самого вендора</h3>
+            <p>Компанія закриває велику частину бізнес-процесів усередині однієї екосистеми. Наприклад, дані автоматично потрапляють у Zoho Analytics — без складного «склеювання» різних платформ.</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">DATA</div>
+            <div class="bento-h">Єдина структура даних</div>
+            <p>Одне джерело правди</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">PROCESS</div>
+            <div class="bento-h">Єдина логіка процесів</div>
+            <p>Без розривів між системами</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">AUTO</div>
+            <div class="bento-h">Спільні автоматизації</div>
+            <p>Workflow поверх усіх модулів</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-tag">ANALYTICS</div>
+            <div class="bento-h">Наскрізна аналітика</div>
+            <p>Централізоване управління</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 40. Section — платформа для росту -->
+    <section class="slide slide--section" data-slide="40">
+      <img class="slide-watermark slide-watermark--top" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <div class="section-num reveal">08</div>
+        <h1 class="slide-h1 reveal">Zoho як <em>платформа</em><br>для зростання</h1>
+        <p class="section-sub reveal">Не на рік чи два. <em>На 5, 10 і більше років</em> розвитку бізнесу.</p>
+      </div>
+    </section>
+
+    <!-- 41. Features — переваги росту -->
+    <section class="slide slide--features" data-slide="41">
+      <div class="slide-content">
+        <div class="eyebrow reveal">ЩО ОТРИМУЄ БІЗНЕС</div>
+        <h2 class="slide-h2 reveal">Замість <em>десятків систем</em> — єдина платформа</h2>
+        <div class="features-grid reveal">
+          <div class="feature-card">
+            <div class="feature-icon">1</div>
+            <h3 class="feature-h">Єдина екосистема</h3>
+            <p>Без перестрибувань між системами при масштабуванні</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⛨</div>
+            <h3 class="feature-h">Централізована підтримка</h3>
+            <p>Один центр експертизи замість десятка підрядників</p>
+          </div>
+          <div class="feature-card feature-card--accent">
+            <div class="feature-icon">↑</div>
+            <h3 class="feature-h">Швидше масштабуватись</h3>
+            <p>Менша складність архітектури → концентрація на розвитку бізнесу, а не на підтримці систем</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚯</div>
+            <h3 class="feature-h">Спільна архітектура</h3>
+            <p>Процеси в одній логіці на всіх рівнях</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 42. Closing quote / takeaway -->
+    <section class="slide" data-slide="42">
+      <div class="slide-content">
+        <div class="quote-mark reveal">"</div>
+        <p class="quote-text reveal">Zoho — це <em style="color:var(--c-acc);">не просто інструмент</em> автоматизації. Це платформа, яка допомагає бізнесу <em style="color:var(--c-acc);">системно масштабуватися</em>.</p>
+        <div class="quote-author reveal">
+          <div class="quote-name">Підсумок</div>
+          <div class="quote-role">Zoho Summit · 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 43. Q&A -->
+    <section class="slide slide--qa" data-slide="43">
+      <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
+      <div class="slide-content">
+        <h1 class="qa-text reveal"><em>Питання?</em></h1>
+        <p class="qa-sub reveal">Час для діалогу.</p>
+      </div>
+    </section>
+
+    <!-- 44. Contact -->
+    <section class="slide slide--contact" data-slide="44">
+      <div class="slide-content">
+        <div class="contact-eyebrow reveal">КОНТАКТИ</div>
+        <h1 class="contact-name reveal">Павло Яковенко</h1>
+        <div class="contact-role reveal">CEO / Founder · CRMiUM</div>
+        <div class="contact-grid reveal">
+          <a class="contact-link" href="mailto:p.yakovenko@crmium.com">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">p.yakovenko@crmium.com</div>
+          </a>
+          <a class="contact-link" href="https://crmium.com" target="_blank" rel="noopener">
+            <div class="contact-label">Сайт</div>
+            <div class="contact-value">crmium.com</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="pres-nav">
+    <button class="pres-prev" aria-label="Previous slide" disabled>←</button>
+    <button class="pres-next" aria-label="Next slide">→</button>
+  </nav>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const deck = document.querySelector('.pres-deck');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const total = slides.length;
+      const counterCurr = document.querySelector('.counter-curr');
+      const counterTotal = document.querySelector('.counter-total');
+      const progressBar = document.querySelector('.pres-progress-bar');
+      const btnPrev = document.querySelector('.pres-prev');
+      const btnNext = document.querySelector('.pres-next');
+
+      let current = 0;
+
+      counterTotal.textContent = total;
+
+      function go(idx) {
+        idx = Math.max(0, Math.min(total - 1, idx));
+        current = idx;
+
+        deck.style.transform = 'translateX(-' + (idx * 100) + 'vw)';
+
+        slides.forEach((s, i) => {
+          s.classList.toggle('is-active', i === idx);
+        });
+
+        counterCurr.textContent = idx + 1;
+        progressBar.style.width = ((idx + 1) / total * 100) + '%';
+
+        btnPrev.disabled = idx === 0;
+        btnNext.disabled = idx === total - 1;
+
+        const activeSlide = slides[idx];
+        const isFullBleed = activeSlide.classList.contains('slide--section') ||
+                            activeSlide.classList.contains('slide--qa') ||
+                            activeSlide.classList.contains('slide--image');
+        document.body.classList.toggle('no-bar', isFullBleed);
+
+        activeSlide.querySelectorAll('.reveal').forEach(el => {
+          el.style.animation = 'none';
+          void el.offsetHeight;
+          el.style.animation = '';
+        });
+
+        activeSlide.querySelectorAll('[data-counter]').forEach(animateCounter);
+      }
+
+      function animateCounter(el) {
+        const target = parseInt(el.dataset.counter, 10);
+        if (isNaN(target)) return;
+        const duration = 1500;
+        const start = performance.now();
+        function step(now) {
+          const p = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 4);
+          el.textContent = Math.round(target * eased);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function next() { go(current + 1); }
+      function prev() { go(current - 1); }
+
+      btnNext.addEventListener('click', next);
+      btnPrev.addEventListener('click', prev);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key >= '0' && e.key <= '9' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          const num = parseInt(e.key, 10);
+          if (num === 0) go(9); else go(num - 1);
+          return;
+        }
+        switch (e.key) {
+          case 'ArrowRight':
+          case 'PageDown':
+          case ' ':
+            e.preventDefault(); next(); break;
+          case 'ArrowLeft':
+          case 'PageUp':
+          case 'Backspace':
+            e.preventDefault(); prev(); break;
+          case 'Home':
+            e.preventDefault(); go(0); break;
+          case 'End':
+            e.preventDefault(); go(total - 1); break;
+          case 'f':
+          case 'F':
+            toggleFullscreen(); break;
+          case 'p':
+          case 'P':
+            window.print(); break;
+        }
+      });
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen();
+        }
+      }
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+      document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+      document.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const dx = touchEndX - touchStartX;
+        if (Math.abs(dx) < 50) return;
+        if (dx < 0) next(); else prev();
+      }, { passive: true });
+
+      window.addEventListener('load', () => { go(0); });
+    })();
+  </script>
+</body>
+</html>
