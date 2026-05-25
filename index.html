@@ -994,6 +994,59 @@
       font-weight: 600;
     }
 
+    /* Resources slide */
+    .slide--resources {
+      background:
+        radial-gradient(100% 80% at 100% 0%, rgba(239,101,47,0.15) 0%, transparent 55%),
+        var(--c-bg);
+    }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+    .resources-h {
+      font-size: clamp(48px, 5.5vw, 92px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      color: var(--c-ink);
+      margin-bottom: 28px;
+    }
+    .resources-h em {
+      font-style: normal;
+      color: var(--c-acc);
+      font-weight: 800;
+    }
+    .resources-text {
+      font-size: 22px;
+      color: var(--c-ink-2);
+      line-height: 1.55;
+      max-width: 620px;
+    }
+    .resources-features {
+      list-style: none;
+      padding: 0;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .resources-features li {
+      font-size: 19px;
+      color: var(--c-ink);
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .resources-features li::before {
+      content: '→';
+      position: absolute; left: 0; top: 0;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+
     /* Nav */
     .pres-nav {
       position: fixed;
@@ -1822,8 +1875,30 @@
       </div>
     </section>
 
-    <!-- 47. Contact -->
-    <section class="slide slide--contact" data-slide="47">
+    <!-- 47. Resources — Telegram bot -->
+    <section class="slide slide--resources" data-slide="47">
+      <div class="slide-content resources-grid">
+        <div class="resources-info">
+          <div class="eyebrow reveal">КОРИСНІ МАТЕРІАЛИ</div>
+          <h2 class="resources-h reveal">Хочеш ще <em>більше</em>?</h2>
+          <p class="resources-text reveal">Підпишись на наш Telegram-бот — після виступу кидаю туди корисні матеріали по темі:</p>
+          <ul class="resources-features reveal">
+            <li>Посилання з цієї презентації</li>
+            <li>Кейси клієнтів CRMiUM повністю</li>
+            <li>Чек-листи з впровадження Zoho</li>
+            <li>Дайджест Zoho-новин раз на місяць</li>
+          </ul>
+        </div>
+        <div class="qr-card reveal">
+          <img src="assets/crmium-ua-bot-qr.png" alt="QR — Telegram бот CRMiUM">
+          <div class="qr-card-sublabel">TELEGRAM</div>
+          <div class="qr-card-label">Сканнуй щоб підписатися</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 48. Contact -->
+    <section class="slide slide--contact" data-slide="48">
       <div class="slide-content">
         <div class="contact-eyebrow reveal">КОНТАКТИ</div>
         <h1 class="contact-name reveal">Павло Яковенко</h1>
