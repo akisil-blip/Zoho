@@ -744,27 +744,26 @@
     .growth-trigger {
       display: flex;
       align-items: center;
-      gap: 18px;
-      margin-top: 32px;
+      gap: 24px;
+      margin-top: 36px;
     }
-    .growth-trigger-bar {
-      width: 6px;
-      height: 44px;
-      background: var(--c-acc);
-      border-radius: 3px;
-      flex-shrink: 0;
+    .growth-trigger-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--c-line) 40%, var(--c-line) 60%, transparent 100%);
     }
     .growth-trigger-text {
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--c-ink);
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-    }
-    .growth-trigger-text em {
-      font-style: normal;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
       color: var(--c-acc);
-      font-weight: 800;
+      font-weight: 700;
+      white-space: nowrap;
+      padding: 10px 22px;
+      border: 1px solid rgba(239, 101, 47, 0.35);
+      border-radius: 999px;
+      background: rgba(239, 101, 47, 0.08);
     }
 
     /* Approach Zoho — slide 43 */
@@ -2173,8 +2172,9 @@
         <div class="eyebrow reveal">ПЛАТФОРМА ДЛЯ РОСТУ</div>
         <h2 class="slide-h2 reveal">Без перебудови архітектури — <em>з&nbsp;єдиною екосистемою</em></h2>
         <div class="growth-trigger reveal">
-          <span class="growth-trigger-bar"></span>
-          <span class="growth-trigger-text">Коли компанія <em>росте</em>…</span>
+          <span class="growth-trigger-line"></span>
+          <span class="growth-trigger-text">Коли компанія росте</span>
+          <span class="growth-trigger-line"></span>
         </div>
         <div class="growth-compare reveal">
           <div class="growth-card growth-card--neg">
