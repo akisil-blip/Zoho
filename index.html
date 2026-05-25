@@ -741,6 +741,30 @@
       font-style: normal;
       font-weight: 800;
     }
+    .growth-trigger {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .growth-trigger-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--c-line) 40%, var(--c-line) 60%, transparent 100%);
+    }
+    .growth-trigger-text {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 700;
+      white-space: nowrap;
+      padding: 10px 22px;
+      border: 1px solid rgba(239, 101, 47, 0.35);
+      border-radius: 999px;
+      background: rgba(239, 101, 47, 0.08);
+    }
 
     /* Approach Zoho — slide 43 */
     .approach-grid {
@@ -2145,8 +2169,13 @@
     <!-- 45. Коли компанія росте — не потрібно vs отримує -->
     <section class="slide" data-slide="45">
       <div class="slide-content">
-        <div class="eyebrow reveal">КОЛИ КОМПАНІЯ РОСТЕ</div>
+        <div class="eyebrow reveal">ПЛАТФОРМА ДЛЯ РОСТУ</div>
         <h2 class="slide-h2 reveal">Без перебудови архітектури — <em>з&nbsp;єдиною екосистемою</em></h2>
+        <div class="growth-trigger reveal">
+          <span class="growth-trigger-line"></span>
+          <span class="growth-trigger-text">Коли компанія росте</span>
+          <span class="growth-trigger-line"></span>
+        </div>
         <div class="growth-compare reveal">
           <div class="growth-card growth-card--neg">
             <div class="growth-tag">ЇЙ НЕ ПОТРІБНО</div>
