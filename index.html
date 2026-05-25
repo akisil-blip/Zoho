@@ -463,29 +463,42 @@
     .clients-logos {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
-      margin-top: 48px;
+      gap: 16px;
+      margin-top: 40px;
     }
     .client-card {
       background: transparent;
+      border: 1px solid var(--c-line);
       border-radius: 22px;
-      padding: 32px 24px;
+      padding: 24px 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 180px;
-      transition: transform .35s var(--ease);
+      min-height: 150px;
+      transition: transform .35s var(--ease), border-color .35s var(--ease);
     }
     .client-card:hover {
       transform: translateY(-6px);
+      border-color: var(--c-acc);
     }
     .client-card img {
       max-width: 100%;
-      max-height: 112px;
+      max-height: 92px;
       width: auto;
       height: auto;
       object-fit: contain;
       display: block;
+    }
+    .client-card--placeholder {
+      border-style: dashed;
+      border-color: var(--c-line);
+    }
+    .client-card--placeholder span {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: var(--c-ink-3);
+      text-transform: uppercase;
     }
     .clients-stat {
       display: flex;
@@ -1791,6 +1804,11 @@
           <div class="client-card"><img src="assets/logos/innovecs.png" alt="Innovecs"></div>
           <div class="client-card"><img src="assets/logos/coffee-group.png" alt="Coffee Group"></div>
           <div class="client-card"><img src="assets/logos/genesis.png" alt="Genesis"></div>
+          <div class="client-card"><img src="assets/logos/lun.png" alt="ЛУН"></div>
+          <div class="client-card"><img src="assets/logos/academy-dtek.png" alt="Academy DTEK"></div>
+          <div class="client-card"><img src="assets/logos/laba.png" alt="Laba"></div>
+          <div class="client-card"><img src="assets/logos/eurotrips.png" alt="EUROTRIPS"></div>
+          <div class="client-card client-card--placeholder"><span>+ ще</span></div>
         </div>
         <div class="clients-stat reveal">
           <p>Деякі з цих компаній працюють із Zoho понад 5–10 років, і це дуже важливий показник зрілості платформи. Частина прийшла в Zoho ще будучи невеликим бізнесом і за цей час виросли до системного середнього бізнесу, продовжуючи працювати всередині цієї ж екосистеми.</p>
