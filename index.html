@@ -605,53 +605,39 @@
       color: var(--c-acc-ink);
     }
 
-    /* Consequences cards — slide 42 */
-    .consequences-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-top: 32px;
-    }
-    .consequence-card {
-      background: var(--c-card);
-      border: 1px solid var(--c-line);
-      border-radius: 16px;
-      padding: 22px 20px;
+    /* Consequences list — slide 42 */
+    .consequence-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 28px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      min-height: 200px;
-      transition: border-color .3s var(--ease), transform .3s var(--ease);
+      gap: 12px;
     }
-    .consequence-card:hover {
-      border-color: var(--c-acc);
-      transform: translateY(-4px);
-    }
-    .consequence-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: rgba(239,101,47,0.14);
-      color: var(--c-acc);
+    .consequence-list li {
+      font-size: 20px;
+      color: var(--c-ink);
+      padding: 18px 24px;
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-left: 3px solid var(--c-acc);
+      border-radius: 12px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 22px;
+      gap: 18px;
+      transition: border-color .3s var(--ease), transform .3s var(--ease);
+    }
+    .consequence-list li:hover {
+      border-color: var(--c-acc);
+      transform: translateX(4px);
+    }
+    .consequence-list li::before {
+      content: '×';
+      color: var(--c-acc);
       font-weight: 800;
+      font-size: 26px;
+      flex-shrink: 0;
       line-height: 1;
-    }
-    .consequence-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--c-ink);
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-    }
-    .consequence-sub {
-      font-size: 14px;
-      color: var(--c-ink-2);
-      line-height: 1.45;
-      margin-top: auto;
     }
     .pain-card {
       background: var(--c-card);
@@ -1869,38 +1855,18 @@
     <!-- 42. Наслідки зоопарку -->
     <section class="slide" data-slide="42">
       <div class="slide-content">
-        <div class="eyebrow reveal">ЦІНА «ЗООПАРКУ»</div>
+        <div class="eyebrow reveal">НАСЛІДКИ ЗООПАРКУ</div>
         <h2 class="slide-h2 reveal">Цифровізація наче <em>є</em> — а цілісності <em>немає</em></h2>
-        <p class="slide-body reveal">Рано чи пізно компанія опиняється у точці, коли інструменти множаться, а ефект — навпаки:</p>
-        <div class="consequences-grid reveal">
-          <div class="consequence-card">
-            <div class="consequence-icon">⌖</div>
-            <div class="consequence-title">Розрізнені системи</div>
-            <div class="consequence-sub">Кожна живе своїм життям, без спільної логіки</div>
-          </div>
-          <div class="consequence-card">
-            <div class="consequence-icon">⚠</div>
-            <div class="consequence-title">Нестабільні інтеграції</div>
-            <div class="consequence-sub">Постійно ламаються, потребують доробок і нагляду</div>
-          </div>
-          <div class="consequence-card">
-            <div class="consequence-icon">⎘</div>
-            <div class="consequence-title">Дублювання даних</div>
-            <div class="consequence-sub">Одне й те саме у різних місцях — і ніде не правда</div>
-          </div>
-          <div class="consequence-card">
-            <div class="consequence-icon">⊟</div>
-            <div class="consequence-title">Фрагментована автоматизація</div>
-            <div class="consequence-sub">Процеси не зшиті між модулями</div>
-          </div>
-          <div class="consequence-card">
-            <div class="consequence-icon">∅</div>
-            <div class="consequence-title">Псевдо-цифровізація</div>
-            <div class="consequence-sub">Системи начебто є — а цілісності немає</div>
-          </div>
-        </div>
+        <p class="slide-body reveal">І рано чи пізно виникає ситуація, коли:</p>
+        <ul class="consequence-list reveal">
+          <li>кожна система живе своїм життям</li>
+          <li>інтеграції працюють нестабільно</li>
+          <li>дані дублюються</li>
+          <li>автоматизація стає фрагментованою</li>
+          <li>цифровізація наче є, але цілісності немає</li>
+        </ul>
         <div class="zoo-outro reveal">
-          Десятки інструментів — а замість прискорення бізнес отримує накладні витрати. <em>У випадку з Zoho — підхід зовсім інший.</em>
+          У випадку з <em>Zoho</em> — підхід зовсім інший.
         </div>
       </div>
     </section>
