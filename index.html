@@ -706,6 +706,52 @@
       color: var(--c-acc-ink);
       font-weight: 800;
     }
+    .growth-h {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--c-ink);
+      margin: -4px 0 6px;
+    }
+    .growth-card--pos .growth-h {
+      color: var(--c-acc-ink);
+    }
+    .growth-summary {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: center;
+      margin-top: 32px;
+      padding: 28px 36px;
+      background: var(--c-acc);
+      color: var(--c-acc-ink);
+      border-radius: 22px;
+    }
+    .growth-summary-num {
+      font-size: clamp(48px, 5.4vw, 84px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--c-acc-ink);
+      white-space: nowrap;
+    }
+    .growth-summary-num span {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0;
+      margin-left: 4px;
+    }
+    .growth-summary-text {
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--c-acc-ink);
+      font-weight: 500;
+    }
+    .growth-summary-text em {
+      font-style: normal;
+      font-weight: 800;
+    }
 
     /* Approach Zoho — slide 43 */
     .approach-grid {
@@ -2110,7 +2156,8 @@
     <!-- 45. Quote — Zoho не просто інструмент -->
     <section class="slide" data-slide="45">
       <div class="slide-content">
-        <p class="quote-text reveal"><span class="quote-glyph quote-glyph--open">“</span>Zoho — це <em style="color:var(--c-acc);">не просто інструмент</em> автоматизації. Це платформа, яка допомагає бізнесу <em style="color:var(--c-acc);">системно масштабуватися</em>.<span class="quote-glyph quote-glyph--close">”</span></p>
+        <div class="eyebrow reveal">КЛЮЧОВА ІДЕЯ</div>
+        <p class="quote-text reveal" style="margin-top: 28px;"><span class="quote-glyph quote-glyph--open">“</span>Zoho — це <em style="color:var(--c-acc);">не просто інструмент</em> автоматизації. Це платформа, яка допомагає бізнесу <em style="color:var(--c-acc);">системно масштабуватися</em>.<span class="quote-glyph quote-glyph--close">”</span></p>
       </div>
     </section>
 
@@ -2122,6 +2169,7 @@
         <div class="growth-compare reveal">
           <div class="growth-card growth-card--neg">
             <div class="growth-tag">ЇЙ НЕ ПОТРІБНО</div>
+            <h3 class="growth-h">Болі старого підходу</h3>
             <ul class="growth-list">
               <li>повністю змінювати IT-архітектуру</li>
               <li>переходити між десятками різних систем</li>
@@ -2130,6 +2178,7 @@
           </div>
           <div class="growth-card growth-card--pos">
             <div class="growth-tag">НАТОМІСТЬ БІЗНЕС ОТРИМУЄ</div>
+            <h3 class="growth-h">Підхід Zoho</h3>
             <ul class="growth-list">
               <li>єдину екосистему</li>
               <li>централізовану підтримку</li>
@@ -2150,22 +2199,29 @@
           <div class="feature-card">
             <div class="feature-icon">↑</div>
             <h3 class="feature-h">Швидше масштабуватись</h3>
+            <p>Без міграцій між системами при кожному новому етапі</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">⚯</div>
             <h3 class="feature-h">Зменшувати складність</h3>
+            <p>Одна архітектура замість десятків інтеграцій</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">◎</div>
             <h3 class="feature-h">Не розпорошувати ресурси</h3>
+            <p>Один центр експертизи, один вендор, одна команда</p>
           </div>
           <div class="feature-card feature-card--accent" style="grid-column: span 1;">
             <div class="feature-icon">★</div>
-            <h3 class="feature-h">Концентруватися не на підтримці систем, а на розвитку бізнесу</h3>
+            <h3 class="feature-h">Концентруватися на розвитку бізнесу</h3>
+            <p>А не на підтримці систем</p>
           </div>
         </div>
-        <div class="zoo-outro reveal" style="margin-top: 28px;">
-          Саме тому для багатьох компаній Zoho стає платформою <em>не на рік чи два, а на 5, 10 і більше років</em> розвитку бізнесу.
+        <div class="growth-summary reveal">
+          <div class="growth-summary-num">5, 10+ <span>років</span></div>
+          <div class="growth-summary-text">
+            Саме тому для багатьох компаній Zoho стає платформою <em>не на рік чи два</em>, а на роки розвитку бізнесу.
+          </div>
         </div>
       </div>
     </section>
