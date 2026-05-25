@@ -640,132 +640,6 @@
       line-height: 1;
     }
 
-    /* Growth compare — block 8 */
-    .growth-compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-top: 32px;
-    }
-    .growth-card {
-      background: var(--c-card);
-      border: 1px solid var(--c-line);
-      border-radius: 22px;
-      padding: 32px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .growth-card--pos {
-      background: var(--c-acc);
-      border-color: transparent;
-    }
-    .growth-tag {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--c-acc);
-      font-weight: 700;
-    }
-    .growth-card--pos .growth-tag {
-      color: rgba(21, 23, 28, 0.7);
-    }
-    .growth-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .growth-list li {
-      font-size: 19px;
-      color: var(--c-ink);
-      line-height: 1.4;
-      padding-left: 28px;
-      position: relative;
-    }
-    .growth-card--neg .growth-list li::before {
-      content: '×';
-      position: absolute;
-      left: 0;
-      top: -2px;
-      color: var(--c-acc);
-      font-weight: 800;
-      font-size: 22px;
-    }
-    .growth-card--pos .growth-list li {
-      color: var(--c-acc-ink);
-    }
-    .growth-card--pos .growth-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--c-acc-ink);
-      font-weight: 800;
-    }
-    .growth-summary {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 32px;
-      align-items: center;
-      margin-top: 32px;
-      padding: 26px 36px;
-      background: var(--c-acc);
-      color: var(--c-acc-ink);
-      border-radius: 22px;
-    }
-    .growth-summary-num {
-      font-size: clamp(48px, 5.4vw, 84px);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--c-acc-ink);
-      white-space: nowrap;
-    }
-    .growth-summary-num span {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 0;
-      margin-left: 6px;
-    }
-    .growth-summary-text {
-      font-size: 19px;
-      line-height: 1.5;
-      color: var(--c-acc-ink);
-      font-weight: 500;
-    }
-    .growth-summary-text em {
-      font-style: normal;
-      font-weight: 800;
-    }
-    .growth-trigger {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-top: 36px;
-    }
-    .growth-trigger-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--c-line) 40%, var(--c-line) 60%, transparent 100%);
-    }
-    .growth-trigger-text {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--c-acc);
-      font-weight: 700;
-      white-space: nowrap;
-      padding: 10px 22px;
-      border: 1px solid rgba(239, 101, 47, 0.35);
-      border-radius: 999px;
-      background: rgba(239, 101, 47, 0.08);
-    }
-
     /* Approach Zoho — slide 43 */
     .approach-grid {
       display: grid;
@@ -2166,76 +2040,38 @@
       </div>
     </section>
 
-    <!-- 45. Коли компанія росте — не потрібно vs отримує -->
-    <section class="slide" data-slide="45">
+    <!-- 45. Features — переваги росту -->
+    <section class="slide slide--features" data-slide="45">
       <div class="slide-content">
-        <div class="eyebrow reveal">ПЛАТФОРМА ДЛЯ РОСТУ</div>
-        <h2 class="slide-h2 reveal">Без перебудови архітектури — <em>з&nbsp;єдиною екосистемою</em></h2>
-        <div class="growth-trigger reveal">
-          <span class="growth-trigger-line"></span>
-          <span class="growth-trigger-text">Коли компанія росте</span>
-          <span class="growth-trigger-line"></span>
-        </div>
-        <div class="growth-compare reveal">
-          <div class="growth-card growth-card--neg">
-            <div class="growth-tag">ЇЙ НЕ ПОТРІБНО</div>
-            <ul class="growth-list">
-              <li>повністю змінювати IT-архітектуру</li>
-              <li>переходити між десятками різних систем</li>
-              <li>координувати велику кількість окремих підрядників</li>
-            </ul>
-          </div>
-          <div class="growth-card growth-card--pos">
-            <div class="growth-tag">НАТОМІСТЬ БІЗНЕС ОТРИМУЄ</div>
-            <ul class="growth-list">
-              <li>єдину екосистему</li>
-              <li>централізовану підтримку</li>
-              <li>спільну архітектуру процесів</li>
-              <li>єдиний центр експертизи</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 46. І це дозволяє -->
-    <section class="slide slide--features" data-slide="46">
-      <div class="slide-content">
-        <div class="eyebrow reveal">І ЦЕ ДОЗВОЛЯЄ</div>
-        <h2 class="slide-h2 reveal">Час і фокус — на <em>розвитку</em>, а не на підтримці</h2>
+        <div class="eyebrow reveal">ЩО ОТРИМУЄ БІЗНЕС</div>
+        <h2 class="slide-h2 reveal">Замість <em>десятків систем</em> — єдина платформа</h2>
         <div class="features-grid reveal">
           <div class="feature-card">
-            <div class="feature-icon">↑</div>
-            <h3 class="feature-h">Швидше масштабуватись</h3>
-            <p>Без міграцій між системами на кожному новому етапі росту</p>
+            <div class="feature-icon">1</div>
+            <h3 class="feature-h">Єдина екосистема</h3>
+            <p>Без перестрибувань між системами при масштабуванні</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⛨</div>
+            <h3 class="feature-h">Централізована підтримка</h3>
+            <p>Один центр експертизи замість десятка підрядників</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">⚯</div>
-            <h3 class="feature-h">Зменшувати складність</h3>
-            <p>Одна архітектура замість десятків «склеєних» інтеграцій</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">◎</div>
-            <h3 class="feature-h">Не розпорошувати ресурси</h3>
-            <p>Один центр експертизи, один вендор, одна команда</p>
+            <h3 class="feature-h">Спільна архітектура</h3>
+            <p>Процеси в одній логіці на всіх рівнях</p>
           </div>
           <div class="feature-card feature-card--accent" style="grid-column: span 1;">
-            <div class="feature-icon">★</div>
-            <h3 class="feature-h">Концентруватися на розвитку бізнесу</h3>
-            <p>А не на щоденній підтримці систем</p>
-          </div>
-        </div>
-        <div class="growth-summary reveal">
-          <div class="growth-summary-num">5, 10+<span>років</span></div>
-          <div class="growth-summary-text">
-            Для багатьох компаній Zoho стає платформою <em>не на рік чи два</em>, а на роки системного розвитку бізнесу.
+            <div class="feature-icon">↑</div>
+            <h3 class="feature-h">Швидше масштабуватись</h3>
+            <p>Менша складність архітектури → концентрація на розвитку бізнесу, а не на підтримці систем</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 47. Closing quote / takeaway -->
-    <section class="slide" data-slide="47">
+    <!-- 46. Closing quote / takeaway -->
+    <section class="slide" data-slide="46">
       <div class="slide-content">
         <div class="quote-mark reveal">"</div>
         <p class="quote-text reveal">Zoho — це <em style="color:var(--c-acc);">не просто інструмент</em> автоматизації.<br>Це платформа, яка допомагає бізнесу <em style="color:var(--c-acc);">системно масштабуватися</em>.</p>
@@ -2246,8 +2082,8 @@
       </div>
     </section>
 
-    <!-- 48. Q&A -->
-    <section class="slide slide--qa" data-slide="48">
+    <!-- 47. Q&A -->
+    <section class="slide slide--qa" data-slide="47">
       <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
       <div class="slide-content qa-grid">
         <div>
@@ -2262,8 +2098,8 @@
       </div>
     </section>
 
-    <!-- 49. Resources — Telegram bot -->
-    <section class="slide slide--resources" data-slide="49">
+    <!-- 48. Resources — Telegram bot -->
+    <section class="slide slide--resources" data-slide="48">
       <div class="slide-content resources-grid">
         <div class="resources-info">
           <div class="eyebrow reveal">КОРИСНІ МАТЕРІАЛИ</div>
@@ -2284,8 +2120,8 @@
       </div>
     </section>
 
-    <!-- 50. Contact -->
-    <section class="slide slide--contact" data-slide="50">
+    <!-- 49. Contact -->
+    <section class="slide slide--contact" data-slide="49">
       <div class="slide-content">
         <div class="contact-eyebrow reveal">КОНТАКТИ</div>
         <h1 class="contact-name reveal">Павло Яковенко</h1>
