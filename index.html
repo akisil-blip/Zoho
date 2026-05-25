@@ -640,6 +640,73 @@
       line-height: 1;
     }
 
+    /* Growth compare — block 8 */
+    .growth-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 32px;
+    }
+    .growth-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 22px;
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .growth-card--pos {
+      background: var(--c-acc);
+      border-color: transparent;
+    }
+    .growth-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+    .growth-card--pos .growth-tag {
+      color: rgba(21, 23, 28, 0.7);
+    }
+    .growth-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .growth-list li {
+      font-size: 19px;
+      color: var(--c-ink);
+      line-height: 1.4;
+      padding-left: 28px;
+      position: relative;
+    }
+    .growth-card--neg .growth-list li::before {
+      content: '×';
+      position: absolute;
+      left: 0;
+      top: -2px;
+      color: var(--c-acc);
+      font-weight: 800;
+      font-size: 22px;
+    }
+    .growth-card--pos .growth-list li {
+      color: var(--c-acc-ink);
+    }
+    .growth-card--pos .growth-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--c-acc-ink);
+      font-weight: 800;
+    }
+
     /* Approach Zoho — slide 43 */
     .approach-grid {
       display: grid;
@@ -2035,55 +2102,76 @@
       <img class="slide-watermark slide-watermark--top" src="assets/crmium-outline.png" alt="">
       <div class="slide-content">
         <div class="section-num reveal">08</div>
-        <h1 class="slide-h1 reveal">Zoho як <em>платформа</em><br>для зростання</h1>
-        <p class="section-sub reveal">Не на рік чи два. <em>На 5, 10 і більше років</em> розвитку бізнесу.</p>
+        <h1 class="slide-h1 reveal">Zoho як <em>платформа</em><br>для зростання бізнесу</h1>
+        <p class="section-sub reveal">І саме тому компанії <em>залишаються в Zoho роками</em>.</p>
       </div>
     </section>
 
-    <!-- 45. Features — переваги росту -->
-    <section class="slide slide--features" data-slide="45">
+    <!-- 45. Quote — Zoho не просто інструмент -->
+    <section class="slide" data-slide="45">
       <div class="slide-content">
-        <div class="eyebrow reveal">ЩО ОТРИМУЄ БІЗНЕС</div>
-        <h2 class="slide-h2 reveal">Замість <em>десятків систем</em> — єдина платформа</h2>
+        <p class="quote-text reveal"><span class="quote-glyph quote-glyph--open">“</span>Zoho — це <em style="color:var(--c-acc);">не просто інструмент</em> автоматизації. Це платформа, яка допомагає бізнесу <em style="color:var(--c-acc);">системно масштабуватися</em>.<span class="quote-glyph quote-glyph--close">”</span></p>
+      </div>
+    </section>
+
+    <!-- 46. Коли компанія росте — не потрібно vs отримує -->
+    <section class="slide" data-slide="46">
+      <div class="slide-content">
+        <div class="eyebrow reveal">КОЛИ КОМПАНІЯ РОСТЕ</div>
+        <h2 class="slide-h2 reveal">Без перебудови архітектури — <em>з єдиною екосистемою</em></h2>
+        <div class="growth-compare reveal">
+          <div class="growth-card growth-card--neg">
+            <div class="growth-tag">ЇЙ НЕ ПОТРІБНО</div>
+            <ul class="growth-list">
+              <li>повністю змінювати IT-архітектуру</li>
+              <li>переходити між десятками різних систем</li>
+              <li>координувати велику кількість окремих підрядників</li>
+            </ul>
+          </div>
+          <div class="growth-card growth-card--pos">
+            <div class="growth-tag">НАТОМІСТЬ БІЗНЕС ОТРИМУЄ</div>
+            <ul class="growth-list">
+              <li>єдину екосистему</li>
+              <li>централізовану підтримку</li>
+              <li>спільну архітектуру процесів</li>
+              <li>єдиний центр експертизи</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 47. І це дозволяє + closing summary -->
+    <section class="slide slide--features" data-slide="47">
+      <div class="slide-content">
+        <div class="eyebrow reveal">РЕЗУЛЬТАТ</div>
+        <h2 class="slide-h2 reveal">І це <em>дозволяє</em></h2>
         <div class="features-grid reveal">
           <div class="feature-card">
-            <div class="feature-icon">1</div>
-            <h3 class="feature-h">Єдина екосистема</h3>
-            <p>Без перестрибувань між системами при масштабуванні</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">⛨</div>
-            <h3 class="feature-h">Централізована підтримка</h3>
-            <p>Один центр експертизи замість десятка підрядників</p>
+            <div class="feature-icon">↑</div>
+            <h3 class="feature-h">Швидше масштабуватись</h3>
           </div>
           <div class="feature-card">
             <div class="feature-icon">⚯</div>
-            <h3 class="feature-h">Спільна архітектура</h3>
-            <p>Процеси в одній логіці на всіх рівнях</p>
+            <h3 class="feature-h">Зменшувати складність</h3>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">◎</div>
+            <h3 class="feature-h">Не розпорошувати ресурси</h3>
           </div>
           <div class="feature-card feature-card--accent" style="grid-column: span 1;">
-            <div class="feature-icon">↑</div>
-            <h3 class="feature-h">Швидше масштабуватись</h3>
-            <p>Менша складність архітектури → концентрація на розвитку бізнесу, а не на підтримці систем</p>
+            <div class="feature-icon">★</div>
+            <h3 class="feature-h">Концентруватися не на підтримці систем, а на розвитку бізнесу</h3>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- 46. Closing quote / takeaway -->
-    <section class="slide" data-slide="46">
-      <div class="slide-content">
-        <div class="quote-mark reveal">"</div>
-        <p class="quote-text reveal">Zoho — це <em style="color:var(--c-acc);">не просто інструмент</em> автоматизації.<br>Це платформа, яка допомагає бізнесу <em style="color:var(--c-acc);">системно масштабуватися</em>.</p>
-        <div class="quote-author reveal">
-          <div class="quote-name">Підсумок</div>
-          <div class="quote-role">Zoho Summit · 2026</div>
+        <div class="zoo-outro reveal" style="margin-top: 28px;">
+          Саме тому для багатьох компаній Zoho стає платформою <em>не на рік чи два, а на 5, 10 і більше років</em> розвитку бізнесу.
         </div>
       </div>
     </section>
 
-    <!-- 47. Q&A -->
-    <section class="slide slide--qa" data-slide="47">
+    <!-- 48. Q&A -->
+    <section class="slide slide--qa" data-slide="48">
       <img class="slide-watermark" src="assets/crmium-outline.png" alt="">
       <div class="slide-content qa-grid">
         <div>
@@ -2098,8 +2186,8 @@
       </div>
     </section>
 
-    <!-- 48. Resources — Telegram bot -->
-    <section class="slide slide--resources" data-slide="48">
+    <!-- 49. Resources — Telegram bot -->
+    <section class="slide slide--resources" data-slide="49">
       <div class="slide-content resources-grid">
         <div class="resources-info">
           <div class="eyebrow reveal">КОРИСНІ МАТЕРІАЛИ</div>
@@ -2120,8 +2208,8 @@
       </div>
     </section>
 
-    <!-- 49. Contact -->
-    <section class="slide slide--contact" data-slide="49">
+    <!-- 50. Contact -->
+    <section class="slide slide--contact" data-slide="50">
       <div class="slide-content">
         <div class="contact-eyebrow reveal">КОНТАКТИ</div>
         <h1 class="contact-name reveal">Павло Яковенко</h1>
