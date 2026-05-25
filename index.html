@@ -639,6 +639,119 @@
       flex-shrink: 0;
       line-height: 1;
     }
+
+    /* Approach Zoho — slide 43 */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .approach-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 170px;
+      transition: border-color .3s var(--ease), transform .3s var(--ease);
+    }
+    .approach-card:hover {
+      border-color: var(--c-acc);
+      transform: translateY(-4px);
+    }
+    .approach-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: rgba(239,101,47,0.14);
+      color: var(--c-acc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .approach-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 700;
+    }
+    .approach-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--c-ink);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-top: auto;
+    }
+    .approach-callouts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .approach-example {
+      background: var(--c-card);
+      border: 1px solid var(--c-line);
+      border-left: 3px solid var(--c-acc);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .approach-example-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-acc);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .approach-example p {
+      font-size: 16px;
+      color: var(--c-ink-2);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .approach-example em {
+      font-style: normal;
+      color: var(--c-acc);
+      font-weight: 600;
+    }
+    .approach-result {
+      background: var(--c-acc);
+      color: var(--c-acc-ink);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .approach-result-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(21,23,28,0.65);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .approach-result p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0;
+      color: var(--c-acc-ink);
+      font-weight: 500;
+    }
+    .approach-result em {
+      font-style: normal;
+      font-weight: 800;
+      color: var(--c-acc-ink);
+    }
+
     .pain-card {
       background: var(--c-card);
       border: 1px solid var(--c-line);
@@ -1872,21 +1985,47 @@
     </section>
 
     <!-- 43. Підхід Zoho -->
-    <section class="slide slide--bento" data-slide="43">
+    <section class="slide" data-slide="43">
       <div class="slide-content">
         <div class="eyebrow reveal">ПІДХІД ZOHO</div>
         <h2 class="slide-h2 reveal">Єдина <em>операційна система</em> для бізнесу</h2>
-        <p class="slide-body reveal">Компанія закриває велику частину бізнес-процесів усередині однієї екосистеми, де інтеграції між продуктами вже побудовані <em>на рівні самого вендора</em>.</p>
-        <p class="slide-body reveal" style="margin-top: 24px;"><strong>Це означає:</strong></p>
-        <div class="bento-grid reveal" style="grid-template-columns: repeat(5, 1fr); grid-auto-rows: minmax(110px, auto); margin-top: 18px;">
-          <div class="bento-card"><div class="bento-tag">DATA</div><div class="bento-h">Єдина структура даних</div></div>
-          <div class="bento-card"><div class="bento-tag">PROCESS</div><div class="bento-h">Єдина логіка процесів</div></div>
-          <div class="bento-card"><div class="bento-tag">AUTO</div><div class="bento-h">Спільні автоматизації</div></div>
-          <div class="bento-card"><div class="bento-tag">ANALYTICS</div><div class="bento-h">Наскрізна аналітика</div></div>
-          <div class="bento-card"><div class="bento-tag">CONTROL</div><div class="bento-h">Централізоване управління</div></div>
+        <p class="slide-body reveal">Компанія закриває велику частину бізнес-процесів усередині однієї екосистеми, де інтеграції між продуктами вже побудовані <em>на рівні самого вендора</em> — це означає:</p>
+        <div class="approach-grid reveal">
+          <div class="approach-card">
+            <div class="approach-icon">⌗</div>
+            <div class="approach-tag">DATA</div>
+            <div class="approach-title">Єдина структура даних</div>
+          </div>
+          <div class="approach-card">
+            <div class="approach-icon">⇄</div>
+            <div class="approach-tag">PROCESS</div>
+            <div class="approach-title">Єдина логіка процесів</div>
+          </div>
+          <div class="approach-card">
+            <div class="approach-icon">⚡</div>
+            <div class="approach-tag">AUTO</div>
+            <div class="approach-title">Спільні автоматизації</div>
+          </div>
+          <div class="approach-card">
+            <div class="approach-icon">◐</div>
+            <div class="approach-tag">ANALYTICS</div>
+            <div class="approach-title">Наскрізна аналітика</div>
+          </div>
+          <div class="approach-card">
+            <div class="approach-icon">⊙</div>
+            <div class="approach-tag">CONTROL</div>
+            <div class="approach-title">Централізоване управління</div>
+          </div>
         </div>
-        <div class="zoo-outro reveal" style="margin-top: 24px;">
-          Наприклад, дані з різних систем автоматично потрапляють у <em>Zoho Analytics</em> — наскрізна аналітика без складного «склеювання». Фактично бізнес отримує <em>повноцінну операційну систему</em>, яка закриває ключові процеси в одному середовищі.
+        <div class="approach-callouts reveal">
+          <div class="approach-example">
+            <div class="approach-example-tag">ПРИКЛАД</div>
+            <p>Дані з різних систем автоматично потрапляють у <em>Zoho Analytics</em> — наскрізна аналітика без складного «склеювання» платформ.</p>
+          </div>
+          <div class="approach-result">
+            <div class="approach-result-tag">РЕЗУЛЬТАТ</div>
+            <p>Бізнес отримує <em>повноцінну операційну систему</em>, яка закриває ключові процеси в одному середовищі.</p>
+          </div>
         </div>
       </div>
     </section>
