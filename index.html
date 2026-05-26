@@ -468,18 +468,17 @@
     }
     .client-card {
       background: transparent;
-      border: 1px solid var(--c-line);
+      border: none;
       border-radius: 20px;
       padding: 18px 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 160px;
-      transition: transform .35s var(--ease), border-color .35s var(--ease);
+      transition: transform .35s var(--ease);
     }
     .client-card:hover {
       transform: translateY(-4px);
-      border-color: var(--c-acc);
     }
     .client-card img {
       max-width: 100%;
